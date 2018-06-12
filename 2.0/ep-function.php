@@ -309,7 +309,7 @@ class CoursePress_Widget_Upgrade extends WP_Widget {
 	 * @return string html with "add to cart" button
 	 */
 
-function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add_to_cart_text = '', $type = 'form' ) {
+function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add_to_cart_text = '', $type = 'form', $class='apply-button' ) {
     $product_id = CoursePress_Data_Course::get_setting( $course_id, 'woo/product_id', false );
     if ( empty( $product_id ) ) {
         return '';
@@ -318,6 +318,7 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
     if ( $show_cart_text == '' ) {
         $show_cart_text = esc_html__( 'Show cart', 'cp' );
     }
+    
     $cart_data = WC()->cart->get_cart();
     foreach ( $cart_data as $cart_item_key => $values ) {
         $_product = $values['data'];
@@ -325,8 +326,9 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
             //$content = __( 'This course is already in the cart.', 'cp' );
             global $woocommerce;
             $content .= sprintf(
-                ' <a href="%s" class="single_show_cart_button apply-button">%s</a>',
+                ' <a href="%s" class="single_show_cart_button %s">%s</a>',
                 esc_url( $woocommerce->cart->get_cart_url() ),
+                $class,
                 $show_cart_text
             );
             return $content;
@@ -359,7 +361,7 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
         <?php   } else { ?>
             <input type="hidden" name="paid_tag" value="paid"/> 
         <?php   } ?>
-        <button type="submit" class="single_add_to_cart_button button alt apply-button">
+        <button type="submit" class="single_add_to_cart_button button alt <?php echo $class  ?>">
             <?php echo $add_to_cart_text  ?>
         </button>  
         <?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
@@ -385,8 +387,9 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
         $url = esc_url( $woocommerce->cart->get_cart_url()) . '?add-to-cart=' . esc_attr( $product->id ) . $paid_name_part . $paid_tag_part;
         
         $content = sprintf(
-                    ' <a href="%s" class="single_add_to_cart_button apply-button">%s</a>',
+                    ' <a href="%s" class="single_add_to_cart_button %s">%s</a>',
                     $url,
+                    $class,
                     $add_to_cart_text
         );
         
@@ -404,6 +407,7 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
 ***********************************************************************/
 
 add_shortcode('ep-addtocart', 'ep_addtocart_button' );
+add_shortcode('ep-joinfree', 'ep_joinfree_button' );
 add_shortcode('ep-showfree', 'ep_showfree' );    
 add_shortcode('ep-showpaid', 'ep_showpaid' );
 add_shortcode('ep-showformule', 'ep_showformule' );
@@ -415,6 +419,7 @@ function ep_addtocart_button ($atts) {
         'course_id' => CoursePress_Helper_Utility::the_course( true ),
         'show_cart_text' => __( 'Passez à la formule certifié', 'cp' ),
         'add_to_cart_text' => __( 'Passez à la formule certifié', 'cp' ),
+        'class' => '',
     ), $atts, 'ep_addtocart_button' ) );
     
     $course_id = (int) $course_id;
@@ -435,7 +440,80 @@ function ep_addtocart_button ($atts) {
     $show_cart_text = str_replace('[FORMULE]', CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name'), $show_cart_text );
     $add_to_cart_text = str_replace('[FORMULE]', CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name'), $add_to_cart_text );
 
-    return add_to_cart_button_by_course_id( $course_id, $show_cart_text, $add_to_cart_text, 'link' );
+    return add_to_cart_button_by_course_id( $course_id, $show_cart_text, $add_to_cart_text, 'link', $class );
+    
+}
+
+function ep_joinfree_button ($atts) {
+    
+    extract( shortcode_atts( array(
+        'course_id' => CoursePress_Helper_Utility::the_course( true ),
+        'join_text' => __( 'S inscrire', 'cp' ),
+        'class' => '',
+    ), $atts, 'ep_addtocart_button' ) );
+    
+    $course_id = (int) $course_id;
+		if ( empty( $course_id ) ) {
+			return '';
+		}
+    
+    /**
+     * check course
+     */
+    $is_course = CoursePress_Data_Course::is_course( $course_id );
+    if ( ! $is_course ) {
+        return '';
+    }
+    
+    $course_url = CoursePress_Data_Course::get_course_url( $course_id );
+    
+    $general_settings = CoursePress_Core::get_setting( 'general' );
+    $is_custom_login = cp_is_true( $general_settings['use_custom_login'] );
+    
+    
+    if ( is_user_logged_in() ) {
+			$student_id = get_current_user_id();
+			$student_enrolled = CoursePress_Data_Course::student_enrolled( $student_id, $course_id );
+			if(true == $student_enrolled ) {
+                $button = sprintf( '<a href="%s" class="%s">%s</a>', $course_url, $class, $join_text );
+            } else {
+                $course_url = add_query_arg(
+                    array(
+                        'action' => 'enroll_student',
+                        '_wpnonce' => wp_create_nonce( 'enroll_student' ),
+                    ),
+                    $course_url
+                );
+                $button = sprintf( '<a href="%s" class="%s">%s</a>', $course_url, $class, $join_text );
+            }
+		} else {
+			$course_url = add_query_arg(
+				array(
+					'action' => 'enroll_student',
+					'_wpnonce' => wp_create_nonce( 'enroll_student' ),
+				),
+				$course_url
+			);
+			if ( false === $is_custom_login ) {
+				$signup_url = wp_login_url( $course_url );
+			} else {
+				$signup_url = CoursePress_Core::get_slug( 'signup/', true );
+				$signup_url = add_query_arg(
+					array(
+						'redirect_url' => urlencode( $course_url ),
+						'_wpnonce' => wp_create_nonce( 'redirect_to' ),
+					),
+					$signup_url
+				);
+			}
+            
+            $url = esc_url( $signup_url . '?course_id=' . $course_id );
+            $format = '<a href="%s" class="%s">%s</a>';
+            $button = sprintf( $format, $url, $class, $join_text );
+		}
+
+
+    return $button;
     
 }
 

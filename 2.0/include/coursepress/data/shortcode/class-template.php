@@ -1231,15 +1231,22 @@ class CoursePress_Data_Shortcode_Template {
 		$signup_url = empty( $signup_url ) ? CoursePress_Core::get_slug( 'signup', true ) : $signup_url;
 		$login_url = empty( $login_url ) ? CoursePress_Core::get_slug( 'login', true ) : $login_url;
 
+        
 		if ( ! empty( $redirect_url ) ) {
 			$signup_url = $signup_url . $signup_prefix . 'redirect_url=' . urlencode( $redirect_url );
 			$login_url = $login_url . $login_prefix . 'redirect_url=' . urlencode( $redirect_url );
 		}
-		if ( ! empty( $_POST['redirect_url'] ) ) {
-			$signup_url = $signup_url . '?redirect_url=' . $_POST['redirect_url'];
-			$login_url = $login_url . '?redirect_url=' . $_POST['redirect_url'];
+		if ( ! empty( $_REQUEST['redirect_url'] ) ) {   //Ajout EP CP 12/06/2018 modif POST par REQUEST
+			$signup_url = $signup_url . '?redirect_url=' . $_REQUEST['redirect_url']; //Ajout EP CP 12/06/2018 modif POST par REQUEST
+			$login_url = $login_url . '?redirect_url=' . $_REQUEST['redirect_url']; //Ajout EP CP 12/06/2018 modif POST par REQUEST
+            
+    //Ajout EP CP 12/06/2018 
+            if ( empty( $redirect_url ) ) {
+                $redirect_url = $_REQUEST['redirect_url'];
+            }
+    //Fin d'ajout EP CP
 		}
-
+       // echo '$redirect_url = ' . $redirect_url;
 		$form_message = '';
 		$form_message_class = '';
 
