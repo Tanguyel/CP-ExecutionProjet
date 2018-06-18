@@ -2948,7 +2948,7 @@ class CoursePress_Data_Course {
 					$unit_availability_date = CoursePress_Data_Unit::get_unit_availability_date( $unit_id, $course_id );
 
 					if ( ! empty( $unit_availability_date ) ) {
-						$error_message = sprintf( __( 'This unit will be available on %s', 'cp' ), date_i18n( $date_format, self::strtotime( $unit_availability_date ) ) );
+						$error_message = sprintf( __( 'This unit will be available on %s', 'cp' ), $unit_availability_date ); // Corection Bug EP CP; 
 					} else {
 						if ( $previous_unit_id > 0 ) {
 							$shortcode = sprintf( '[module_status unit_id="%s" previous_unit="%s"]', $unit_id, $previous_unit_id );
