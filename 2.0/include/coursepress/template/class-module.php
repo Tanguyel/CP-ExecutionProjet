@@ -1167,8 +1167,8 @@ class CoursePress_Template_Module {
             $oddeven = 'odd';
             $alt = '';
             $response = self::get_response( $module->ID, get_current_user_id() );
-            if ( empty( $reponse ) ) {
-                $reponse = $response_initial;
+            if ( empty( $response ) ) {
+                $response = $response_initial;
             }
 
 
@@ -1176,6 +1176,7 @@ class CoursePress_Template_Module {
             if ( defined( 'WP_DEBUG_LOG' ) ) {
                 $GLOBALS['wp_log']['CoursepressMod'][] = '$module_to_autocorrect_attributes[module_type] : ' . $module_to_autocorrect_attributes['module_type'];
                 $GLOBALS['wp_log']['CoursepressMod'][] = '$module_to_autocorrect : ' . $module_to_autocorrect->ID;
+                $GLOBALS['wp_log']['CoursepressMod'][] = 'reponse initial : ' . implode(' ; ', $response_initial);
                 $GLOBALS['wp_log']['CoursepressMod'][] = 'reponses : ' . implode(' ; ', $response);
             };
 
@@ -1184,7 +1185,7 @@ class CoursePress_Template_Module {
                     $content .= '<ul class="quiz-question quiz-question-radio">';
                     foreach ( $module_to_autocorrect_attributes['answers'] as $key => $answer ) {
                         $checked = '' !== $response ? ' ' . checked( 1, '' != $response && (int) $response === $key, false ) : '';
-
+                        
                         $format = '<li class="%1$s %2$s"><input type="radio" value="%5$s" name="module[%3$s]" id="module-%3$s-%5$s" %6$s /> <label for="module-%3$s-%5$s">%4$s</label></li>';
                         $content .= sprintf( $format, $oddeven, $alt, $module->ID, $answer, esc_attr( $key ), $disabled_attr . $checked );
 
@@ -1201,7 +1202,7 @@ class CoursePress_Template_Module {
                     $content .= '<ul class="quiz-question quiz-question-checkbox">';
                     foreach ( $module_to_autocorrect_attributes['answers'] as $key => $answer ) {
                         $checked = ' ' . checked( 1, is_array( $response ) && in_array( $key, $response ), false );
-
+                    
                         $format = '<li class="%1$s %2$s"><input type="checkbox" value="%5$s" name="module[%3$s][]" id="module-%3$s-%5$s" %6$s /> <label for="module-%3$s-%5$s">%4$s</label></li>';
                         $content .= sprintf( $format, $oddeven, $alt, $module->ID, $answer, esc_attr( $key ), $disabled_attr . $checked );
 
