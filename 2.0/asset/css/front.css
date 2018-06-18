@@ -992,6 +992,23 @@ input.cp-has-error {
 .cp .module-response .cp-answers .chosen-answer.correct:before {
   content: "\f147";
 }
+/*Ajout EP CP pour autocorrection 18/06/18 */
+
+.cp-answers .chosen-answer {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+}
+.cp-answers .chosen-answer:before {
+  content: "\f158";
+  font-family: Dashicons;
+  text-align: center;
+}
+.cp-answers .chosen-answer.notchosen:before {
+  content: "\f159";
+}
+
+/*Fin ajout EP CP */
 .cp .module-response .quiz-results table,
 .cp .module-response .form-results table {
   text-align: left;
