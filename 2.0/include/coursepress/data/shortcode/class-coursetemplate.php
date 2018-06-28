@@ -945,7 +945,14 @@ class CoursePress_Data_Shortcode_CourseTemplate {
 						$list_content .= '
 							<div class="unit-page-module-wrapper ' . $preview_class . ' ' . $type_class . ' ' . $passed_class . ' ' . $answered_class . ' ' . $completed_class . ' ' . $seen_class . '">
 							';
-						$module_link = trailingslashit( $unit_link ) . 'page/' . $key . '#module-' . $m_key;
+                        //Ajout EP CP 28/06/2018 correction bug lien focus view 
+                        if ( 'focus' == $view_mode ) {
+                            $module_link = trailingslashit( $unit_link ) . 'page/' . $key . '/module_id/' . $m_key; //Element ajouté pour le mode focus
+                        } else {
+                            $module_link = trailingslashit( $unit_link ) . 'page/' . $key . '#module-' . $m_key; //Element initial conservé
+                        }
+                        
+                        //Fin ajout EP CP
 						$module_title = $module->post_title; //Ajout CP EP mise en place des span autour
 						$module_title = $enrolled ? '<a href="' . esc_url( $module_link ) . '">' . esc_html( $module_title ) . '</a>' : sprintf( '<span>%s</span>', $module->post_title ); //esc_html($module_title); Ajout CP EP enlever esc_html
 
