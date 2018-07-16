@@ -5,8 +5,8 @@ Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Tags: LMS, learning management system, online course, education, e-learning, classes, courses, teach, assignments, lessons
 Requires at least: 4.1
-Tested up to: 4.9.4
-Stable tag: 2.1.5
+Tested up to: 4.9.6
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,34 +41,30 @@ Make sure every question gets answered and assignments graded quickly – even f
 = Promote and Sell =
 The CoursePress LMS includes everything you need to market your classes and keep students involved. Invite new users, share a course overview, embed a video preview, drip release units and send notifications when new material is available.
 
-<blockquote>
-= Level-up with <a href="https://premium.wpmudev.org/project/coursepress-pro/">CoursePress</a> =
-
-Dreaming of building the next Udemy, Udacity, Coursera or Lynda? CoursePress can get you started for free!
-
-Use <a href="https://premium.wpmudev.org/project/coursepress-pro/">CoursePress</a> to create an unlimited number of courses.
-
-<h4>Features available in CoursePress include:</h4>
-<br>
-<ul>
-  <li>Trusted LMS that powers the Academy on WPMU DEV</li>
-  <li>Unlimited Course creation</li>
-  <li>Tools for course promotion and marketing</li>
-  <li>Entice new students with a course ‘teaser’ – including previews of video, course elements and a description</li>
-  <li>Automated and manual assessment and reporting features – including automatic grading</li>
-  <li>Drip release units</li>
-  <li>Complete media integration</li>
-  <li>Included CoursePress theme and dynamically shortcode integration</li>
-  <li>Interactive discussion boards to help develop a more robust learning environment</li>
-  <li>Allow students to download and upload quiz files or any other file types</li>
-  <li>Genuinely assessed certification</li>
-  <li>Give every course a custom completion certificate</li>
-  <li>Assign multiple instructors and course facilitators</li>
-  <li>Works great with Multisite</li>
-</ul>
-
-Add beautiful courses to your WordPress or Multisite network.
-</blockquote>
+> = Level-up with [CoursePress](https://premium.wpmudev.org/project/coursepress-pro/) =
+>
+> Dreaming of building the next Udemy, Udacity, Coursera or Lynda? CoursePress can get you started for free!
+>
+> Use [CoursePress](https://premium.wpmudev.org/project/coursepress-pro/) to create an unlimited number of courses.
+>
+> #### Features available in CoursePress include:
+>
+> * Trusted LMS that powers the Academy on WPMU DEV
+> * Unlimited Course creation
+> * Tools for course promotion and marketing
+> * Entice new students with a course ‘teaser’ – including previews of video, course elements and a description
+> * Automated and manual assessment and reporting features – including automatic grading
+> * Drip release units
+> * Complete media integration
+> * Included CoursePress theme and dynamically shortcode integration
+> * Interactive discussion boards to help develop a more robust learning environment
+> * Allow students to download and upload quiz files or any other file types
+> * Genuinely assessed certification
+> * Give every course a custom completion certificate
+> * Assign multiple instructors and course facilitators
+> * Works great with Multisite
+>
+> Add beautiful courses to your WordPress or Multisite network.
 
 == Frequently Asked Questions ==
 
@@ -111,6 +107,22 @@ You can find [in-depth setup and usage instructions with screenshots here »](ht
 
 == Changelog ==
 
+= 2.2.0 =
+* Fixed: Ability to duplicate a course for an instructor.
+* Fixed: Compatibility with plugins/themes which use login form.
+* Fixed: Conflict with other plugins with early get_posts() function usage.
+* Fixed: Display on medium size tablets.
+* Fixed: Enrollment popup does not work.
+* Fixed: Login overlay is not accessible in some situations.
+* Fixed: Problem with CoursePress version in the export file.
+* Fixed: Problem with missing pagination for course discussions.
+* Fixed: Problem with the single instructor template.
+* Fixed: Showing a unit description.
+* Fixed: Turn off autocompletion for a unit.
+* GDPR: Added ability to erase user personal data.
+* GDPR: Added ability to export user personal data.
+* GDPR: Added plugin information to default "Private Policy" page during auto-creation of this page.
+
 = 2.1.5 =
 * Fixed: Added course categories information in the export file.
 * Fixed: Check MarketPress integration to avoid warnings.
@@ -122,7 +134,7 @@ You can find [in-depth setup and usage instructions with screenshots here »](ht
 * Improved: Added CoursePress version to export file.
 
 = 2.1.4 =
-* Fixed: Course certificate email settings were hidden for nonpremium users.
+* Fixed: Course certificate email settings were hidden for non premium users.
 * Fixed: Discussion layout issue.
 * Fixed: Missing new instructor on instructors list.
 * Fixed: On a course structure show section without modules if "Show units without modules" is checked.

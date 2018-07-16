@@ -558,7 +558,7 @@ class CoursePress_Data_Unit {
 		}
 
 		$structure_visibility = CoursePress_Data_Course::structure_visibility( $course_id );
-        
+
 		return ! empty( $structure_visibility['structure'][ $unit_id ] );
 	}
 

@@ -29,7 +29,7 @@ class CoursePress_View_Front_Course {
 	 *
 	 * @var string
 	 */
-	protected static $template = false;
+	public static $template = false;
 
 	/**
 	 * Initialize the module, hook up our functions.
@@ -630,11 +630,15 @@ class CoursePress_View_Front_Course {
 		if ( is_admin() || ! $wp_query ) {
 			return;
 		}
-
+		/**
+		 * Do it only on main query
+		 */
+		if ( ! $wp_query->is_main_query() ) {
+			return;
+		}
 		$page = get_query_var( 'pagename' );
 		$course = get_query_var( 'course' );
 		$coursename = get_query_var( 'coursename' );
-
 		// Is the user on a CoursePress page?
 		if ( $course || $coursename || 'dashboard' == $page ) {
 			remove_action(
@@ -972,6 +976,7 @@ class CoursePress_View_Front_Course {
 			// Render completion page
 			if ( $cp->is_enrolled ) {
 				$student_progress = CoursePress_Data_Student::get_completion_data( $cp->student_id, $cp->course_id );
+				CoursePress_Data_Student::get_calculated_completion_data( $cp->student_id, $cp->course_id, $student_progress );
 				$is_failed = CoursePress_Helper_Utility::get_array_val(
 					$student_progress,
 					'completion/failed'

@@ -5,6 +5,9 @@ Build Time:  16/07/18
 CHANGELOG
 =================================================
 
+= 0.1.0 = 
+* Update : Reprise de la base de Coursepress 2.2.0 (voir ci dessous)
+
 = 0.0.10 = 
 * Fixed : Format des formulaires pour les faires correspondre aux quiz. 
 * fixed : Correxion redirection après inscription
@@ -46,11 +49,50 @@ CHANGELOG
 
 
 
+== Base Changelog ==
 
+= 2.2.0 =
+* Fixed: Ability to duplicate a course for an instructor.
+* Fixed: Compatibility with plugins/themes which use login form.
+* Fixed: Conflict with other plugins with early get_posts() function usage.
+* Fixed: Display on medium size tablets.
+* Fixed: Enrollment popup does not work.
+* Fixed: Login overlay is not accessible in some situations.
+* Fixed: Problem with CoursePress version in the export file.
+* Fixed: Problem with missing pagination for course discussions.
+* Fixed: Problem with the single instructor template.
+* Fixed: Showing a unit description.
+* Fixed: Turn off autocompletion for a unit.
+* GDPR: Added ability to erase user personal data.
+* GDPR: Added ability to export user personal data.
+* GDPR: Added plugin information to default "Private Policy" page during auto-creation of this page.
+
+= 2.1.5 =
+* Fixed: Added course categories information in the export file.
+* Fixed: Check MarketPress integration to avoid warnings.
+* Fixed: Mistakes in language strings.
+* Fixed: Problem with the login form on small screens like mobile.
+* Fixed: Show CoursePress Theme instructors box only when a course has at least one instructor.
+* Fixed: Warnings on the "Grade" tab, when one of a module is a quiz.
+* Fixed: Warnings when we use WooCommerce 3x.
+* Improved: Added CoursePress version to export file.
+
+= 2.1.4 =
+* Fixed: Course certificate email settings were hidden for non premium users.
+* Fixed: Discussion layout issue.
+* Fixed: Missing new instructor on instructors list.
+* Fixed: On a course structure show section without modules if "Show units without modules" is checked.
+* Fixed: PHP notices when try to edit not exited unit.
+* Fixed: Problem with display course sub-menu on the frontend.
+* Fixed: Show unit progress on admin panel.
+* Fixed: There was no ability to remove instructor.
+* Fixed: Typo in notifications configuration.
+* Fixed: Typo in MarketPress integration box.
+* Improved: Added filters to get_time_estimation() functions: coursepress_course_get_time_estimation, coursepress_unit_get_time_estimation, coursepress_module_get_time_estimation.
+* Improved: Prevent saves units before fetching all data.
 
 = 2.1.3 =
 * Fixed: Unit and Pages TinyMCE editor does not work after WordPress update to 4.9.
-
 = 2.1.2 =
 * Improved: Add ability to define certificate logo.
 * Improved: Show instructor feedback on student workbook frontend.
