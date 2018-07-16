@@ -1,13 +1,17 @@
 Plugin Name: Execution Projet CoursePress
 Author:      Tanguy El Mouahidine
-Build Time:  07/05/18
+Build Time:  16/07/18
 
 CHANGELOG
 =================================================
 
 = 0.0.10 = 
 * Fixed : Format des formulaires pour les faires correspondre aux quiz. 
-
+* fixed : Correxion redirection après inscription
+* Fixed : Bug Autocorrection
+* Fixed : Bug affichage de la date de l'unité suivante indisponible
+* Fixed : Lien dans la structure pour la vue focus mode (renvoyait au début et non sur le module)
+* Added : Shortcode pour lien d'inscription
 
 
 = 0.0.9 = 
