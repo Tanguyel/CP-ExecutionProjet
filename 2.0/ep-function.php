@@ -66,7 +66,7 @@ function epcp_add_custom_order_line_item_meta($item, $cart_item_key, $values, $o
 
     if(array_key_exists('paid_name', $values))
     {
-        $item->add_meta_data( __( 'Formule', 'cp' ),$values['paid_name']);
+        $item->add_meta_data( __( 'Formule', 'coursepress' ),$values['paid_name']);
     }
     
     if(array_key_exists('paid_tag', $values))
@@ -108,10 +108,10 @@ class CoursePress_Widget_Help extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'cp_course_help',
-			'description' => __( 'A small space giving instruction to get help', 'cp' ),
+			'description' => __( 'A small space giving instruction to get help', 'coursepress' ),
 		);
 
-		parent::__construct( 'CP_Widget_Help', __( 'Course Help', 'cp' ), $widget_ops );
+		parent::__construct( 'CP_Widget_Help', __( 'Course Help', 'coursepress' ), $widget_ops );
 
 	}
 
@@ -121,7 +121,7 @@ class CoursePress_Widget_Help extends WP_Widget {
 		$title = esc_attr( $instance['title'] );
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'cp' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'coursepress' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
 		</p>
 		<?php
@@ -138,7 +138,7 @@ class CoursePress_Widget_Help extends WP_Widget {
 	public function widget( $args, $instance ) {
 		extract( $args, EXTR_SKIP );
 
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Course Help', 'cp' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Course Help', 'coursepress' ) : $instance['title'], $instance, $this->id_base );
         $course_id = CoursePress_Helper_Utility::the_course( true );
         $course_id = (int) $course_id;
         $course_base_url = CoursePress_Data_Course::get_course_url( $course_id );
@@ -164,7 +164,7 @@ class CoursePress_Widget_Help extends WP_Widget {
 		}
 		?>
 		<ul>
-            <li>N'hésitez pas à poser une question sur le <a href="<?php echo esc_url_raw( $course_base_url . CoursePress_Core::get_slug( 'discussion' ) ); ?>"><?php echo esc_html__( 'Discussions', 'cp' ); ?></a></li>
+            <li>N'hésitez pas à poser une question sur le <a href="<?php echo esc_url_raw( $course_base_url . CoursePress_Core::get_slug( 'discussion' ) ); ?>"><?php echo esc_html__( 'Discussions', 'coursepress' ); ?></a></li>
 <?php       if ($group != $free_group_tag && $group != 'free' && $group != '') { ?>
             <li>Vous pouvez aussi <a href="http://www.executionprojet.fr/contact/">contacter le formateur</a></li>
 <?php       } ?>
@@ -186,10 +186,10 @@ class CoursePress_Widget_Upgrade extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'cp_course_upgrade',
-			'description' => __( 'An invitation to upgrade for the paid version of the course if the couse has 2 formula and the student is in the free formula', 'cp' ),
+			'description' => __( 'An invitation to upgrade for the paid version of the course if the couse has 2 formula and the student is in the free formula', 'coursepress' ),
 		);
 
-		parent::__construct( 'CP_Widget_Upgrade', __( 'Course Upgrade', 'cp' ), $widget_ops );
+		parent::__construct( 'CP_Widget_Upgrade', __( 'Course Upgrade', 'coursepress' ), $widget_ops );
 
 	}
 
@@ -204,24 +204,24 @@ class CoursePress_Widget_Upgrade extends WP_Widget {
         
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'cp' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'coursepress' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
 		</p>
         <p>
-			<label for="<?php echo $this->get_field_id( 'formule-pres' ); ?>"><?php _e( 'Presentation texte for Paid Formula:', 'cp' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'formule-pres' ); ?>"><?php _e( 'Presentation texte for Paid Formula:', 'coursepress' ); ?></label>
 			<textarea class="widefat" id="<?php echo $this->get_field_id( 'formule-pres' ); ?>" name="<?php echo $this->get_field_name( 'formule-pres' ); ?>" rows="12"><?php echo $formule_pres; ?></textarea>
 		</p>
         <p>
-			<label for="<?php echo $this->get_field_id( 'formule-link-text' ); ?>"><?php _e( 'Texte for the link adding the course to the cart (upgrade)', 'cp' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'formule-link-text' ); ?>"><?php _e( 'Texte for the link adding the course to the cart (upgrade)', 'coursepress' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'formule-link-text' ); ?>" name="<?php echo $this->get_field_name( 'formule-link-text' ); ?>" type="text" value="<?php echo $formule_link_text; ?>"/>
-            <legend><?php _e( 'Use [FORMULE] to insert the (paid) Formule Name', 'cp' ); ?></legend>
+            <legend><?php _e( 'Use [FORMULE] to insert the (paid) Formule Name', 'coursepress' ); ?></legend>
 		</p>
         <p>
-			<label for="<?php echo $this->get_field_id( 'contact-pres' ); ?>"><?php _e( 'Presentation texte for the contact invite :', 'cp' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'contact-pres' ); ?>"><?php _e( 'Presentation texte for the contact invite :', 'coursepress' ); ?></label>
 			<textarea class="widefat" id="<?php echo $this->get_field_id( 'contact-pres' ); ?>" name="<?php echo $this->get_field_name( 'contact-pres' ); ?>" rows="5"><?php echo $contact_pres; ?></textarea>
 		</p>
         <p>
-			<label for="<?php echo $this->get_field_id( 'contact-link-text' ); ?>"><?php _e( 'Texte for the contact link:', 'cp' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'contact-link-text' ); ?>"><?php _e( 'Texte for the contact link:', 'coursepress' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'contact-link-text' ); ?>" name="<?php echo $this->get_field_name( 'contact-link-text' ); ?>" type="text" value="<?php echo $contact_link_text; ?>"/>
 		</p>
 
@@ -260,7 +260,7 @@ class CoursePress_Widget_Upgrade extends WP_Widget {
             
             
             if ($group == $free_group_tag || $group == 'free' || $group == '') {
-                $title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Course Upgrade', 'cp' ) : $instance['title'], $instance, $this->id_base );
+                $title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Course Upgrade', 'coursepress' ) : $instance['title'], $instance, $this->id_base );
                 $formule_pres = html_entity_decode(esc_attr( $instance['formule-pres'] ));
                 $formule_link_text = esc_attr( $instance['formule-link-text'] );
                 $formule_link_text =str_replace('[FORMULE]', CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name'), $formule_link_text );
@@ -316,14 +316,14 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
     }
 
     if ( $show_cart_text == '' ) {
-        $show_cart_text = esc_html__( 'Show cart', 'cp' );
+        $show_cart_text = esc_html__( 'Show cart', 'coursepress' );
     }
     
     $cart_data = WC()->cart->get_cart();
     foreach ( $cart_data as $cart_item_key => $values ) {
         $_product = $values['data'];
         if ( $product_id == $_product->id ) {
-            //$content = __( 'This course is already in the cart.', 'cp' );
+            //$content = __( 'This course is already in the cart.', 'coursepress' );
             global $woocommerce;
             $content .= sprintf(
                 ' <a href="%s" class="single_show_cart_button %s">%s</a>',
@@ -417,8 +417,8 @@ function ep_addtocart_button ($atts) {
     
     extract( shortcode_atts( array(
         'course_id' => CoursePress_Helper_Utility::the_course( true ),
-        'show_cart_text' => __( 'Passez à la formule certifié', 'cp' ),
-        'add_to_cart_text' => __( 'Passez à la formule certifié', 'cp' ),
+        'show_cart_text' => __( 'Passez à la formule certifié', 'coursepress' ),
+        'add_to_cart_text' => __( 'Passez à la formule certifié', 'coursepress' ),
         'class' => '',
     ), $atts, 'ep_addtocart_button' ) );
     
@@ -448,7 +448,7 @@ function ep_joinfree_button ($atts) {
     
     extract( shortcode_atts( array(
         'course_id' => CoursePress_Helper_Utility::the_course( true ),
-        'join_text' => __( 'S inscrire', 'cp' ),
+        'join_text' => __( 'S inscrire', 'coursepress' ),
         'class' => '',
     ), $atts, 'ep_addtocart_button' ) );
     

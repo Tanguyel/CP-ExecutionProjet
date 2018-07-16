@@ -53,8 +53,8 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
 	 ***************************************************************************/
     public function __construct() {
         parent::__construct( array(
-            'singular' => __( 'Student', 'cp' ),
-            'plural' => __( 'Students', 'cp' ),
+            'singular' => __( 'Student', 'coursepress' ),
+            'plural' => __( 'Students', 'coursepress' ),
             'ajax' => false,// should this table support ajax?
         ) );
 
@@ -76,9 +76,9 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
 		 * filter options
 		 */
         $this->filter_options = array(
-            'all' => __( 'All', 'cp' ),
-            'yes' => __( 'Certified', 'cp' ),
-            'no' => __( 'Not certified', 'cp' ),
+            'all' => __( 'All', 'coursepress' ),
+            'yes' => __( 'Certified', 'coursepress' ),
+            'no' => __( 'Not certified', 'coursepress' ),
         );
         if ( isset( $_REQUEST['certified'] ) && array_key_exists( $_REQUEST['certified'], $this->filter_options ) ) {
             $this->filter_show = $_REQUEST['certified'];
@@ -155,10 +155,10 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
                     $group = str_replace(CoursePress_Data_Course::get_setting( $course_id, 'base_formula_tag') . '-', '', $group);
                     $group = str_replace(CoursePress_Data_Course::get_setting( $course_id, 'base_formula_tag'), '', $group);
                     if ($group == 'hold'){
-                        $group_name = __(' Hold','cp');
+                        $group_name = __(' Hold','coursepress');
                         $group_class .= ' hold';
                     } else if ($group == 'complete'){
-                        $group_name .= __(' Paid','cp');
+                        $group_name .= __(' Paid','coursepress');
                         $group_class .= ' complete';
                     } else {
                         $group_name .= ' ' . $group;
@@ -229,12 +229,12 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
         $course_id = isset( $_GET['id'] ) ? (int) $_GET['id'] : null;
         $columns = array(
             'cb' => '<input type="checkbox" />',
-            'username' => __( 'Username', 'cp' ),
-            'display_name' => __( 'Display Name', 'cp' ),
-            'first_name' => __( 'First Name', 'cp' ),
-            'last_name' => __( 'Last Name', 'cp' ),
-            'formule' => __( 'Formule', 'cp' ), //Ajout EP CP 2 Formule
-            'certificates' => __( 'Certified', 'cp' ),
+            'username' => __( 'Username', 'coursepress' ),
+            'display_name' => __( 'Display Name', 'coursepress' ),
+            'first_name' => __( 'First Name', 'coursepress' ),
+            'last_name' => __( 'Last Name', 'coursepress' ),
+            'formule' => __( 'Formule', 'coursepress' ), //Ajout EP CP 2 Formule
+            'certificates' => __( 'Certified', 'coursepress' ),
         );
 
         if ( ! CoursePress_Data_Capabilities::can_withdraw_students( $course_id ) ) {
@@ -309,9 +309,9 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
         );
 
         $actions = array(
-            'id' => sprintf( '<span>%s</span>', esc_html( sprintf( __( 'ID: %d', 'cp' ), $item->ID ) ) ),
-            'profile' => sprintf( '<a href="%s">%s</a>', $profile_link, esc_html__( 'Student Profile', 'cp' ) ),
-            'workbook' => sprintf( '<a href="%s">%s</a>', $workbook_link, esc_html__( 'Workbook', 'cp' ) ),
+            'id' => sprintf( '<span>%s</span>', esc_html( sprintf( __( 'ID: %d', 'coursepress' ), $item->ID ) ) ),
+            'profile' => sprintf( '<a href="%s">%s</a>', $profile_link, esc_html__( 'Student Profile', 'coursepress' ) ),
+            'workbook' => sprintf( '<a href="%s">%s</a>', $workbook_link, esc_html__( 'Workbook', 'coursepress' ) ),
         );
 
         if ( current_user_can( 'edit_users' ) ) {
@@ -325,7 +325,7 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
                         get_edit_user_link( $item->ID )
                     )
                 ),
-                __( 'Edit User Profile', 'cp' )
+                __( 'Edit User Profile', 'coursepress' )
             );
         }
 
@@ -334,7 +334,7 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
                 '<a href="#" class="withdraw-student" data-id="%s" data-nonce="%s">%s</a>',
                 esc_attr( $item->ID ),
                 esc_attr( wp_create_nonce( 'withdraw-single-student-'.$item->ID ) ),
-                esc_html__( 'Withdraw', 'cp' )
+                esc_html__( 'Withdraw', 'coursepress' )
             );
         }
         return $actions;
@@ -532,7 +532,7 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
                         $add_form_to_add_student = false;
                         printf(
                             '<span>%s</span>',
-                            __( 'You can not add a student, the class limit is reached.', 'cp' )
+                            __( 'You can not add a student, the class limit is reached.', 'coursepress' )
                         );
                     }
                 } else {
@@ -546,7 +546,7 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
                             $id,
                             $name,
                             array(
-                                'placeholder' => __( 'Choose student...', 'cp' ),
+                                'placeholder' => __( 'Choose student...', 'coursepress' ),
                                 'class' => 'chosen-select narrow',
                                 'exclude' => $this->students,
                                 'context' => 'students',
@@ -563,21 +563,21 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
                             esc_attr( $nonce_search )
                         );
                     } else {
-                        $user_selector = '<input type="text" id="' . $id .'" name="' . $name . '" placeholder="' . esc_attr__( 'Enter user ID', 'cp' ) . '" />';
+                        $user_selector = '<input type="text" id="' . $id .'" name="' . $name . '" placeholder="' . esc_attr__( 'Enter user ID', 'coursepress' ) . '" />';
                     }
                     $user_selector = apply_filters( 'coursepress_student_selector', $user_selector, $id, $name );
                     echo $user_selector;
                     printf(
                         ' <input type="button" class="add-new-student-button button" data-nonce="%s" value="%s" >',
                         esc_attr( $nonce ),
-                        esc_attr__( 'Add Student', 'cp' )
+                        esc_attr__( 'Add Student', 'coursepress' )
                     );
                 }
             }
 
             if ( CoursePress_Data_Capabilities::can_withdraw_students( $course_id ) ) {
     ?>
-    <a class="withdraw-all-students" data-nonce="<?php echo $withdraw_nonce; ?>" href="#"><?php esc_html_e( 'Withdraw all students', 'cp' ); ?></a>
+    <a class="withdraw-all-students" data-nonce="<?php echo $withdraw_nonce; ?>" href="#"><?php esc_html_e( 'Withdraw all students', 'coursepress' ); ?></a>
     <?php
             }
     ?>
@@ -593,9 +593,9 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
         $course_id = (int) $_GET['id'];
 
         if ( CoursePress_Data_Capabilities::can_assign_course_student( $course_id ) || CoursePress_Data_Capabilities::can_invite_students( $course_id ) ) {
-            esc_html_e( 'There are no students enrolled in this course. Add them below.', 'cp' );
+            esc_html_e( 'There are no students enrolled in this course. Add them below.', 'coursepress' );
         } else {
-            esc_html_e( 'There are no students enrolled in this course.', 'cp' );
+            esc_html_e( 'There are no students enrolled in this course.', 'coursepress' );
         }
     }
 
@@ -607,7 +607,7 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
     public function column_certificates( $item_id ) {
         $item = $this->get_student( $item_id );
         if ( 'yes' == $item->data->certified ) {
-            return sprintf( '<span class="cp-certified">%s</span>', esc_html__( 'Certified', 'cp' ) );
+            return sprintf( '<span class="cp-certified">%s</span>', esc_html__( 'Certified', 'coursepress' ) );
         }
         return '<span class="dashicons dashicons-no"></span>';
     }
@@ -624,10 +624,10 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
             $paid_formule_name = CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name'); 
 
             $actions = array(
-                //'withdraw'    => __( 'Withdraw','cp' ),
-                'free-formule' => sprintf(__('Swich Formula to: %s','cp'), $free_formule_name),
-                'paid-formule' => sprintf(__('Swich Formula to: %s','cp'), $paid_formule_name),
-                'custom_formule' => __('Swich Formula group','cp'),
+                //'withdraw'    => __( 'Withdraw','coursepress' ),
+                'free-formule' => sprintf(__('Swich Formula to: %s','coursepress'), $free_formule_name),
+                'paid-formule' => sprintf(__('Swich Formula to: %s','coursepress'), $paid_formule_name),
+                'custom_formule' => __('Swich Formula group','coursepress'),
             );
         }
         return $actions;
@@ -709,7 +709,7 @@ class CoursePress_Helper_Table_CourseStudent extends WP_Users_List_Table {
 
 		echo "</select>\n";
 
-		submit_button( __( 'Apply', 'cp' ), 'action', '', false, array( 'id' => "doaction$two" ) );
+		submit_button( __( 'Apply', 'coursepress' ), 'action', '', false, array( 'id' => "doaction$two" ) );
 		echo "\n";
 	}
     

@@ -35,15 +35,15 @@ class CoursePress_Template_Course {
 			$certificated = CoursePress_Data_Certificate::is_enabled();
 
 			$table_columns = array(
-				'name' => __( 'Course', 'cp' ),
-                'formule' => __( 'Formule', 'cp' ), // Ajout EP CP 2 Formule
-				'date_enrolled' => __( 'Date Enrolled', 'cp' ),
-				'average' => __( 'Average', 'cp' ),
-				'status' => __( 'Status', 'cp' ),
+				'name' => __( 'Course', 'coursepress' ),
+                'formule' => __( 'Formule', 'coursepress' ), // Ajout EP CP 2 Formule
+				'date_enrolled' => __( 'Date Enrolled', 'coursepress' ),
+				'average' => __( 'Average', 'coursepress' ),
+				'status' => __( 'Status', 'coursepress' ),
 			);
 
 			if ( $certificated ) {
-				$table_columns['certificate'] = __( 'Certificate', 'cp' );
+				$table_columns['certificate'] = __( 'Certificate', 'coursepress' );
 			}
 
 			foreach ( $table_columns as $column => $column_label ) {
@@ -77,7 +77,7 @@ class CoursePress_Template_Course {
 
                             } else if ( $group == 'paid') {
                                 $group_class = 'paid';
-                                $group_name = __( 'Payante', 'cp' );
+                                $group_name = __( 'Payante', 'coursepress' );
 
                             } else if ( $group == CoursePress_Data_Course::get_setting( $course_id, 'second_formula_tag' )) {
                                 $group_class = 'free';
@@ -85,7 +85,7 @@ class CoursePress_Template_Course {
 
                             } else if ( $group == 'free') {
                                 $group_class = 'free';
-                                $group_name = __( 'Gratuite', 'cp' );
+                                $group_name = __( 'Gratuite', 'coursepress' );
 
                             } elseif ( $group == '' ) {
                                 $group_class = '';
@@ -110,7 +110,7 @@ class CoursePress_Template_Course {
 							if ( empty( $date_enrolled ) ) {
 								$date_enrolled = sprintf(
 									'<span aria-hidden="true">&#8212;</span><span class="screen-reader-text">%s</span>',
-									__( 'Unknown enrolled date.', 'cp' )
+									__( 'Unknown enrolled date.', 'coursepress' )
 								);
 							} else {
 								$date_enrolled = date_i18n( $date_format, CoursePress_Data_Course::strtotime( $date_enrolled ) );
@@ -137,11 +137,11 @@ class CoursePress_Template_Course {
 							break;
 
 						case 'certificate':
-							$download_certificate = __( 'Not available', 'cp' );
+							$download_certificate = __( 'Not available', 'coursepress' );
 
 							if ( $course_completed ) {
 								$certificate_link = CoursePress_Data_Certificate::get_encoded_url( $course->ID, $student_id );
-								$download_certificate = sprintf( '<a href="%s" class="button-primary">%s</a>', $certificate_link, __( 'Download', 'cp' ) );
+								$download_certificate = sprintf( '<a href="%s" class="button-primary">%s</a>', $certificate_link, __( 'Download', 'coursepress' ) );
 							}
 
 							$table_body .= sprintf( '<td>%s</td>', $download_certificate );
@@ -156,7 +156,7 @@ class CoursePress_Template_Course {
 
 				if ( $allow_workbook ) {
 					$workbook_url = CoursePress_Data_Student::get_workbook_url( $course->ID );
-					$workbook_link = sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $workbook_url ), __( 'Workbook', 'cp' ) );
+					$workbook_link = sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $workbook_url ), __( 'Workbook', 'coursepress' ) );
 
 					$row_actions['workbook'] = $workbook_link;
 				}
@@ -166,7 +166,7 @@ class CoursePress_Template_Course {
 					'course_id' => $course->ID,
 					'student_id' => $student_id,
 				) );
-				$withdraw_link = sprintf( '<a href="%s" class="cp-withdraw-student">%s</a>', esc_url( $withdraw_link ), __( 'Withdraw', 'cp' ) );
+				$withdraw_link = sprintf( '<a href="%s" class="cp-withdraw-student">%s</a>', esc_url( $withdraw_link ), __( 'Withdraw', 'coursepress' ) );
 				$row_actions['withdraw'] = $withdraw_link;
 
 				$table_body .= sprintf( '<td class="row-actions">%s</td>', implode( ' | ', $row_actions ) );
@@ -272,7 +272,7 @@ class CoursePress_Template_Course {
 			$content .= sprintf(
 				'<div class="%s-status">%s</div>',
 				esc_attr( $type ),
-				esc_html__( 'Pending', 'cp' )
+				esc_html__( 'Pending', 'coursepress' )
 			);
 			if ( $remove_buttons ) {
 				$content .= '<div class="remove"><a><span class="dashicons dashicons-dismiss"></span></a></div>';

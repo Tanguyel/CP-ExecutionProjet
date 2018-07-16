@@ -69,18 +69,18 @@ class CoursePress_Admin_Table_Courses extends WP_Posts_List_Table {
 
 	public function get_columns() {
 		$columns = array(
-			'title' => __( 'Title', 'cp' ),
+			'title' => __( 'Title', 'coursepress' ),
 		);
 
 		if ( ! empty( $this->student_id ) ) {
 			$columns = array_merge(
 				$columns,
 				array(
-                    'formule' => __( 'Formule', 'cp' ), //Ajout EP CP 2 Formule
-					'date_enrolled' => __( 'Date Enrolled', 'cp' ),
-					'last_login' => __( 'Last Active', 'cp' ),
-					'average' => __( 'Average', 'cp' ),
-					'certificate' => __( 'Certificate', 'cp' ),
+                    'formule' => __( 'Formule', 'coursepress' ), //Ajout EP CP 2 Formule
+					'date_enrolled' => __( 'Date Enrolled', 'coursepress' ),
+					'last_login' => __( 'Last Active', 'coursepress' ),
+					'average' => __( 'Average', 'coursepress' ),
+					'certificate' => __( 'Certificate', 'coursepress' ),
 				)
 			);
 		}
@@ -96,10 +96,10 @@ class CoursePress_Admin_Table_Courses extends WP_Posts_List_Table {
 		$actions = array();
 
 		$course_url = CoursePress_Data_Course::get_course_url( $item->ID );
-		$actions['course_id'] = sprintf( __( 'Course ID: %d', 'cp' ), $item->ID );
+		$actions['course_id'] = sprintf( __( 'Course ID: %d', 'coursepress' ), $item->ID );
 
 		if ( ! empty( $this->student_id ) ) {
-			$actions['view'] = sprintf( '<a href="%s" target="_blank">%s</a>', $course_url, __( 'View Course', 'cp' ) );
+			$actions['view'] = sprintf( '<a href="%s" target="_blank">%s</a>', $course_url, __( 'View Course', 'coursepress' ) );
 
 			$workbook_url = add_query_arg(
 				array(
@@ -112,7 +112,7 @@ class CoursePress_Admin_Table_Courses extends WP_Posts_List_Table {
 			);
 			$can_update = CoursePress_Data_Capabilities::can_update_course( $item->ID );
 			if ( $can_update ) {
-				$actions['workbook'] = sprintf( '<a href="%s">%s</a>', $workbook_url, __( 'Workbook', 'cp' ) );
+				$actions['workbook'] = sprintf( '<a href="%s">%s</a>', $workbook_url, __( 'Workbook', 'coursepress' ) );
 			}
 		}
 
@@ -131,7 +131,7 @@ class CoursePress_Admin_Table_Courses extends WP_Posts_List_Table {
 		if ( empty( $date_enrolled ) ) {
 			return sprintf(
 				'<span aria-hidden="true">&#8212;</span><span class="screen-reader-text">%s</span>',
-				__( 'Unknown enrolled date.', 'cp' )
+				__( 'Unknown enrolled date.', 'coursepress' )
 			);
 		}
 
@@ -163,11 +163,11 @@ class CoursePress_Admin_Table_Courses extends WP_Posts_List_Table {
 
 	public function column_certificate( $course ) {
 		$completed = CoursePress_Data_Student::is_course_complete( $this->student_id, $course->ID );
-		$download_certificate = __( 'Not available', 'cp' );
+		$download_certificate = __( 'Not available', 'coursepress' );
 
 		if ( $completed ) {
 			$certificate_link = CoursePress_Data_Certificate::get_encoded_url( $course->ID, $this->student_id );
-			$download_certificate = sprintf( '<a href="%s" class="button-primary">%s</a>', $certificate_link, __( 'Download', 'cp' ) );
+			$download_certificate = sprintf( '<a href="%s" class="button-primary">%s</a>', $certificate_link, __( 'Download', 'coursepress' ) );
 		}
 
 		return $download_certificate;
@@ -186,10 +186,10 @@ class CoursePress_Admin_Table_Courses extends WP_Posts_List_Table {
             $group = str_replace(CoursePress_Data_Course::get_setting( $course_id, 'base_formula_tag') . '-', '', $group);
             $group = str_replace(CoursePress_Data_Course::get_setting( $course_id, 'base_formula_tag'), '', $group);
             if ($group == 'hold'){
-                $group_name = __(' Hold','cp');
+                $group_name = __(' Hold','coursepress');
                 $group_class .= ' hold';
             } else if ($group == 'complete'){
-                $group_name .= __(' Paid','cp');
+                $group_name .= __(' Paid','coursepress');
                 $group_class .= ' complete';
             } else {
                 $group_name .= ' ' . $group;

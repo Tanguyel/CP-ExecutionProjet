@@ -2011,11 +2011,11 @@ class CoursePress_Data_Student {
 		$is_completed = ! empty( $completed );
 
 		$labels = array(
-			'certified' => __( 'Certified', 'cp' ),
-			'failed' => __( 'Failed', 'cp' ),
-			'awaiting-review' => __( 'Awaiting Review', 'cp' ),
-			'ongoing' => __( 'Ongoing', 'cp' ),
-			'incomplete' => __( 'Incomplete', 'cp' ),
+			'certified' => __( 'Certified', 'coursepress' ),
+			'failed' => __( 'Failed', 'coursepress' ),
+			'awaiting-review' => __( 'Awaiting Review', 'coursepress' ),
+			'ongoing' => __( 'Ongoing', 'coursepress' ),
+			'incomplete' => __( 'Incomplete', 'coursepress' ),
 		);
 
 		if ( $is_completed ) {

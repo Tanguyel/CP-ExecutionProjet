@@ -1,5 +1,5 @@
 <div class="step-title step-6">
-	<?php printf( __( 'Step 6 &ndash; Enrollment %s', 'cp' ), $title2 ); ?>
+	<?php printf( __( 'Step 6 &ndash; Enrollment %s', 'coursepress' ), $title2 ); ?>
 	<div class="status <?php echo $setup_class; ?>"></div>
 </div>
 
@@ -7,14 +7,14 @@
 	<input type="hidden" name="meta_setup_step_6" value="saved" />
 
 	<div class="wide">
-		<label><?php _e( 'Enrollment Restrictions', 'cp' ); ?></label>
-		<p class="description"><?php _e( 'Select the limitations on accessing and enrolling in this course.', 'cp' ); ?></p>
+		<label><?php _e( 'Enrollment Restrictions', 'coursepress' ); ?></label>
+		<p class="description"><?php _e( 'Select the limitations on accessing and enrolling in this course.', 'coursepress' ); ?></p>
 		<?php echo CoursePress_Helper_UI::select( 'meta_enrollment_type', $enrollment_types, $enrollment_type, 'chosen-select medium' ); ?>
 	</div>
 
 	<div class="wide enrollment-type-options prerequisite<?php echo $prerequisite_class; ?>">
-		<label><?php _e( 'Prerequisite Courses', 'cp' ); ?></label>
-		<p class="description"><?php _e( 'Select the courses a student needs to complete before enrolling in this course', 'cp' ); ?></p>
+		<label><?php _e( 'Prerequisite Courses', 'coursepress' ); ?></label>
+		<p class="description"><?php _e( 'Select the courses a student needs to complete before enrolling in this course', 'coursepress' ); ?></p>
 		<select name="meta_enrollment_prerequisite" class="medium chosen-select chosen-select-course <?php echo $class_extra; ?>" multiple="true" data-placeholder=" ">
 
 			<?php if ( ! empty( $courses ) ) : foreach ( $courses as $course ) : ?>
@@ -25,17 +25,17 @@
 	</div>
 
 	<div class="wide enrollment-type-options passcode <?php echo $passcode_class; ?>">
-		<label><?php _e( 'Course Passcode', 'cp' ); ?></label>
-		<p class="description"><?php _e( 'Enter the passcode required to access this course', 'cp' ); ?></p>
+		<label><?php _e( 'Course Passcode', 'coursepress' ); ?></label>
+		<p class="description"><?php _e( 'Enter the passcode required to access this course', 'coursepress' ); ?></p>
 		<input type="text" name="meta_enrollment_passcode" value="<?php echo esc_attr( $enrollment_passcode ); ?>" />
 	</div>
 
 	<?php if ( false === $disable_payment ) :
 		$one = array(
 				'meta_key' => 'payment_paid_course',
-				'title' => __( 'Course Payment', 'cp' ),
-				'description' => __( 'Payment options for your course. Additional plugins are required and settings vary depending on the plugin.', 'cp' ),
-				'label' => __( 'This is a paid course', 'cp' ),
+				'title' => __( 'Course Payment', 'coursepress' ),
+				'description' => __( 'Payment options for your course. Additional plugins are required and settings vary depending on the plugin.', 'coursepress' ),
+				'label' => __( 'This is a paid course', 'coursepress' ),
 				'default' => false,
 			);
 		echo '<hr class="separator" />';
@@ -54,16 +54,16 @@
         // Ajout EP CP pour ajout formule gratuite
     $two = array(
         'meta_key' => 'second_formula_course',
-        //'title' => __( 'Second Formula for the Course', 'cp' ),
-        'description' => __( 'Create a group in order to have a second free formula for the course', 'cp' ),
-        'label' => __( 'Create a free formula', 'cp' ),
+        //'title' => __( 'Second Formula for the Course', 'coursepress' ),
+        'description' => __( 'Create a group in order to have a second free formula for the course', 'coursepress' ),
+        'label' => __( 'Create a free formula', 'coursepress' ),
         'default' => false,
     );
     echo CoursePress_Helper_UI::course_edit_checkbox( $two, $course_id );
     ?>
-    <label class="normal required"><?php _e( 'Commercial name', 'cp' ); ?></label>
+    <label class="normal required"><?php _e( 'Commercial name', 'coursepress' ); ?></label>
     <input type="text" name="meta_base_formula_name" value="<?php echo esc_attr( $base_formula_name ); ?>" />
-    <label class="normal required"><?php _e( 'Tag of the base formula group', 'cp' ); ?></label>
+    <label class="normal required"><?php _e( 'Tag of the base formula group', 'coursepress' ); ?></label>
     <input type="text" name="meta_base_formula_tag" value="<?php echo esc_attr( $base_formula_tag ); ?>" /> 
     <?php
         // Fin Ajout EP CP pour partie de cours payante et gratuite
@@ -86,10 +86,10 @@
     <hr class="separator" />
     <div class="has2_formula_toggle wide <?php echo $second_formula_course ? '' : 'hidden'; ?>">
         <div class="" style="overflow: hidden">
-            <label class="normal"><?php _e( 'Second  Free formula', 'cp' ); ?></label>
-            <label class="normal required" style="clear: both; display: block; float: left; font-weight: normal; width: 250px; margin: 0;"><?php _e( 'Comercial name', 'cp' ); ?></label>
+            <label class="normal"><?php _e( 'Second  Free formula', 'coursepress' ); ?></label>
+            <label class="normal required" style="clear: both; display: block; float: left; font-weight: normal; width: 250px; margin: 0;"><?php _e( 'Comercial name', 'coursepress' ); ?></label>
             <input type="text" name="meta_second_formula_name" style="clear: right; display: block; float: left; margin-bottom: 10px; max-width: 280px;" value="<?php echo esc_attr( $second_formula_name ); ?>" />
-            <label class="normal required" style="clear: both; display: block; float: left; font-weight: normal; width: 250px; margin: 0;"><?php _e( 'Tag of the second formula group', 'cp' ); ?></label>
+            <label class="normal required" style="clear: both; display: block; float: left; font-weight: normal; width: 250px; margin: 0;"><?php _e( 'Tag of the second formula group', 'coursepress' ); ?></label>
             <input type="text" name="meta_second_formula_tag" style="clear: right; display: block; float: left; margin-bottom: 10px; max-width: 280px;" value="<?php echo esc_attr( $second_formula_tag ); ?>" /> 
         </div>  
     </div>

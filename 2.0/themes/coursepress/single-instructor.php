@@ -29,7 +29,7 @@ $assigned_courses = $instructor->get_assigned_courses_ids( 'publish' );
 		?>
 
 		<h2 class="h2-instructor-bio">
-			<?php _e( 'Courses', 'cp' ); ?>
+			<?php _e( 'Courses', 'coursepress' ); ?>
 		</h2>
 
 		<?php
