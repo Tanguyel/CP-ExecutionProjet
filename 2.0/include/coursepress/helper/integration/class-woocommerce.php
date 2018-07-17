@@ -682,7 +682,7 @@ class CoursePress_Helper_Integration_WooCommerce {
 		$cart_data = WC()->cart->get_cart();
 		foreach ( $cart_data as $cart_item_key => $values ) {
 			$_product = $values['data'];
-			if ( $product_id == $_product->id ) {
+			if ( $product_id == $_product->get_id() ) { //Update CP EP remplacement fonction depracted
 				$content = __( 'This course is already in the cart.', 'coursepress' );
 				global $woocommerce;
 				$content .= sprintf(
@@ -705,8 +705,9 @@ class CoursePress_Helper_Integration_WooCommerce {
 		do_action( 'woocommerce_before_add_to_cart_form' ); ?>
         <form class="cart" method="post" enctype='multipart/form-data' action="<?php echo esc_url( wc_get_cart_url() ); ?>">
         <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-        <input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
-<?php  //Ajout EP CP 2 formule 
+        <input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" />
+<?php   //Update CP EP remplacement fonction depracted derniere ligne
+        //Ajout EP CP 2 formule 
         
         if (cp_is_true(CoursePress_Data_Course::get_setting( $course_id, 'second_formula_course',false))) {
             $paid_name = CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name');
