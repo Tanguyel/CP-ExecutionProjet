@@ -327,7 +327,7 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
             global $woocommerce;
             $content .= sprintf(
                 ' <a href="%s" class="single_show_cart_button %s">%s</a>',
-                esc_url( $woocommerce->cart->get_cart_url() ),
+                esc_url( wc_get_cart_url() ),
                 $class,
                 $show_cart_text
             );
@@ -384,7 +384,7 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
         $paid_tag_part = '&paid_tag=' . $paid_tag;
         
         global $woocommerce;
-        $url = esc_url( $woocommerce->cart->get_cart_url()) . '?add-to-cart=' . esc_attr( $product->id ) . $paid_name_part . $paid_tag_part;
+        $url = esc_url( wc_get_cart_url()) . '?add-to-cart=' . esc_attr( $product->id ) . $paid_name_part . $paid_tag_part;
         
         $content = sprintf(
                     ' <a href="%s" class="single_add_to_cart_button %s">%s</a>',

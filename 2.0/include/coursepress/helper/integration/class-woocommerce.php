@@ -687,7 +687,7 @@ class CoursePress_Helper_Integration_WooCommerce {
 				global $woocommerce;
 				$content .= sprintf(
 					' <button data-link="%s" class="single_show_cart_button button">%s</button>',
-					esc_url( $woocommerce->cart->get_cart_url() ),
+					esc_url( wc_get_cart_url() ), //Update CP EP replacement de fonction depracted WC_CART::get_cart_url()
 					esc_html__( 'Show cart', 'coursepress' )
 				);
 				return wpautop( $content );
