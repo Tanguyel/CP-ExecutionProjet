@@ -263,7 +263,7 @@ class CoursePress_Widget_Upgrade extends WP_Widget {
                 $title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Course Upgrade', 'coursepress' ) : $instance['title'], $instance, $this->id_base );
                 $formule_pres = html_entity_decode(esc_attr( $instance['formule-pres'] ));
                 $formule_link_text = esc_attr( $instance['formule-link-text'] );
-                $formule_link_text =str_replace('[FORMULE]', CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name'), $formule_link_text );
+                $formule_link_text = str_replace('[FORMULE]', CoursePress_Data_Course::get_setting( $course_id, 'base_formula_name'), $formule_link_text );
                 $contact_pres = html_entity_decode(esc_attr( $instance['contact-pres'] ));
                 $contact_link_text = esc_attr( $instance['contact-link-text'] );
                                 
@@ -322,7 +322,7 @@ function add_to_cart_button_by_course_id( $course_id, $show_cart_text = '', $add
     $cart_data = WC()->cart->get_cart();
     foreach ( $cart_data as $cart_item_key => $values ) {
         $_product = $values['data'];
-        if ( $product_id == $_product->id ) {
+        if ( $product_id == $_product->get_id() ) {
             //$content = __( 'This course is already in the cart.', 'coursepress' );
             global $woocommerce;
             $content .= sprintf(
