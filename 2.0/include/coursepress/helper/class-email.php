@@ -348,7 +348,7 @@ class CoursePress_Helper_Email {
 			$header_string .= $key . ': ' . $value . "\r\n";
 		}
 
-		$email['message'] = CoursePress_Helper_Utility::filter_content( $email['message'] );
+		//$email['message'] = CoursePress_Helper_Utility::filter_content( $email['message'] );  Ajout EP CP Test pour voir si cela resout le probleme de mail 
 		$email['headers'] = $header_string;
 
 		/**
