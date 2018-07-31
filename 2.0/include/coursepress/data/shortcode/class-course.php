@@ -399,7 +399,7 @@ class CoursePress_Data_Shortcode_Course {
 
 		$content = ! empty( $title_tag ) ? '<' . $title_tag . ' class="course-title course-title-' . $course_id . ' ' . $class . '">' : '';
 		$content .= 'yes' == $link ? '<a href="' . get_permalink( $course_id ) . '" title="' . $title . '">' : '';
-		$content .= apply_filters( 'coursepress_schema', $title, 'title' );
+		$content .= $title; //apply_filters( 'coursepress_schema', $title, 'title' ); Modif EP CP 31/07/18 Supression du schema --> mis dans le theme
 		$content .= 'yes' == $link ? '</a>' : '';
 		$content .= ! empty( $title_tag ) ? '</' . $title_tag . '>' : '';
 
@@ -497,7 +497,7 @@ class CoursePress_Data_Shortcode_Course {
 		/**
 		 * schema.org
 		 */
-		$content_schema = apply_filters( 'coursepress_schema', '', 'description' );
+		$content_schema = "";//apply_filters( 'coursepress_schema', '', 'description' ); Modifs EP CP 31/07/18 Supression du schema --> mis dans le theme
 
 		$content .= '<div class="course-description course-description-' . $course_id . ' ' . $class . '"' . $content_schema . '>';
 		$content .= $title;
@@ -1518,6 +1518,8 @@ class CoursePress_Data_Shortcode_Course {
 		if ( ( ( 'default' == $type && 'video' == $priority ) || 'video' == $type || ( 'default' == $type && 'image' == $priority && empty( $course_image ) ) ) && ! empty( $course_video ) ) {
 
 			$content = '<div class="video_player course-featured-media course-featured-media-' . $course_id . ' ' . $class . '">';
+            
+            $content .= '<meta itemprop="image" content="' . esc_url( $course_image ) . '">'; //Ajout EP CP 31/07 Ajout microdata données strucrurées 
 
 			$content .= ! empty( $wrapper ) ? '<' . $wrapper . ' style="' . $wrapper_style . '">' : '';
 
@@ -1551,7 +1553,7 @@ class CoursePress_Data_Shortcode_Course {
 			$content .= '<div class="course-thumbnail course-featured-media course-featured-media-' . $course_id . ' ' . $class . '">';
 			$content .= ! empty( $wrapper ) ? '<' . $wrapper . ' style="' . $wrapper_style . '">' : '';
 
-			$content .= '<img src="' . esc_url( $course_image ) . '" class="course-media-img"></img>';
+			$content .= '<img src="' . esc_url( $course_image ) . '" class="course-media-img" itemprop="image"></img>'; //Modif EP CP 31/07 Ajout microdata données strucrurées 
 
 			$content .= ! empty( $wrapper ) ? '</' . $wrapper . '>' : '';
 			$content .= '</div>';
@@ -1861,6 +1863,7 @@ class CoursePress_Data_Shortcode_Course {
 			'course_id' => CoursePress_Helper_Utility::the_course( true ),
             'label' => __( 'Public', 'coursepress' ),
 			'class' => '',
+            'schema' => 'audience',
 		), $atts, 'course_public' ) );
 
 		$course_id = (int) $course_id;
@@ -1871,12 +1874,17 @@ class CoursePress_Data_Shortcode_Course {
 		$class = sanitize_html_class( $class );
         
 		$course = get_post( $course_id );
-
+        
 		$public = CoursePress_Data_Course::get_setting( $course_id, 'course_public', '' );
+        
+        if ($schema == 'audience') {
+            $schema = 'itemprop="' . $schema . '" itemscope itemtype="http://schema.org/EducationalAudience"';
+            $public = '<span itemprop="educationalRole">' . $public . '</span>';
+        }
 
 		if ( ! empty( $public ) ) {
 			$content = $title;
-            $content .= '<div class="course_public course_public-' . $course_id . ' ' . $class . '">';
+            $content .= '<div class="course_public course_public-' . $course_id . ' ' . $class . '"' . $schema . '>';
 			$content .= $public;
 			$content .= '</div>';
 
@@ -1899,6 +1907,7 @@ class CoursePress_Data_Shortcode_Course {
 			'course_id' => CoursePress_Helper_Utility::the_course( true ),
             'label' => __( 'Prerequisite', 'coursepress' ),
 			'class' => '',
+            'schema' => 'coursePrerequisites',
 		), $atts, 'course_prerequisites' ) );
 
 		$course_id = (int) $course_id;
@@ -1909,12 +1918,16 @@ class CoursePress_Data_Shortcode_Course {
 		$class = sanitize_html_class( $class );
         
 		$course = get_post( $course_id );
+        
+        if ($schema != '') {
+            $schema = 'itemprop=' . $schema;
+        }
 
 		$prerequisites = CoursePress_Data_Course::get_setting( $course_id, 'course_prerequisites', '' );
 
 		if ( ! empty( $prerequisites ) ) {
 			$content = $title;
-            $content .= '<div class="course_prerequisites course_prerequisites-' . $course_id . ' ' . $class . '">';
+            $content .= '<div class="course_prerequisites course_prerequisites-' . $course_id . ' ' . $class . '"' . $schema .'>';
 			$content .= $prerequisites;
 			$content .= '</div>';
 

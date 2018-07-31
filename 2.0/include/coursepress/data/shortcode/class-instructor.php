@@ -161,7 +161,7 @@ class CoursePress_Data_Shortcode_Instructor {
 							 */
 							$schema = apply_filters( 'coursepress_schema', '', 'itemscope-person' );
 
-							$content .= '<div class="instructor-profile ' . $class . '"'.$schema.'>';
+							$content .= '<div class="instructor-profile ' . $class . '" itemprop="author"'.$schema.'>';
 
 							if ( $link_all ) {
 								$content .= '<a href="' . esc_url_raw( $profile_href ) . '">';
