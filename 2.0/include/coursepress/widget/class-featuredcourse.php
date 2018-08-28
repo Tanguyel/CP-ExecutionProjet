@@ -136,12 +136,12 @@ class CoursePress_Widget_FeaturedCourse extends WP_Widget {
 		<div class="fcp_featured_widget cp_featured_widget-course-<?php echo $course_id; ?>">
 			<?php echo do_shortcode( '[course_title course_id="'. $course_id . '"]' ); ?>
 			<?php
-			echo do_shortcode( '[course_media type="' . $selected_type . '" priority="' . $selected_priority . '" course_id="' . $course_id . '"]' );
-			?>
+			echo do_shortcode( '[course_media type="' . $selected_type . '" priority="' . $selected_priority . '" course_id="' . $course_id . '" height="" width=""]' ); //Ajout EP CP 28/08/18 height="" width=""
+			/*?>
 			<div class="cp_featured_widget_course_summary">
 				<?php echo do_shortcode( '[course_summary course_id="' . $course_id . '" length="30"]' ); ?>
-			</div>
-
+			</div><?php */ // Ajout EP CP 28/08/18 Suppression du resumé
+            ?>
 			<div class="cp_featured_widget_course_link">
 				<button class="apply-button apply-button-details" data-link="<?php echo esc_url( get_permalink( $course_id ) ); ?>"><?php echo esc_html( $button_label ); ?></button>
 			</div>
