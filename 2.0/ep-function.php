@@ -3,7 +3,6 @@
 /******
 Ficher avec les fonctions plugables specifique à EP CP
 
-
 ************/
 
 
@@ -166,7 +165,7 @@ class CoursePress_Widget_Help extends WP_Widget {
 		<ul>
             <li>N'hésitez pas à poser une question sur le <a href="<?php echo esc_url_raw( $course_base_url . CoursePress_Core::get_slug( 'discussion' ) ); ?>"><?php echo esc_html__( 'Discussions', 'coursepress' ); ?></a></li>
 <?php       if ($group != $free_group_tag && $group != 'free' && $group != '') { ?>
-            <li>Vous pouvez aussi <a href="http://www.executionprojet.fr/contact/">contacter le formateur</a></li>
+            <li>Vous pouvez aussi : <a class="apply-button" href="mailto:tanguy@executionprojet.fr">contacter le formateur par email</a> ou <a class="apply-button" href="https://calendly.com/executionprojet/suivi-formation"> Prendre un rendez-vous de suivi</a></li>
 <?php       } ?>
 		</ul>
 		<?php

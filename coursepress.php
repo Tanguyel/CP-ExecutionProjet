@@ -1,17 +1,16 @@
 <?php
 /**
  * Plugin Name: ExecutionProjet CoursePress
- * Version:     0.1.0 (based on CP 2.2.0)
+ * Version:     0.1.1 (based on CP 2.2.0)
  * Description: Modificated version of CoursePress for the site ExecutionProjet.fr. CoursePress Pro turns WordPress into a powerful online learning platform. Set up online courses by creating learning units with quiz elements, video, audio etc. You can also assess student work, sell your courses and much much more. Modified Version with the addition of autocorrect input. 
- * Author:      WPMU DEV / Tanguy EL Mouahidine
+ * Author:      WPMU DEV / Tanguy El Mouahidine
  * Author URI:  http://www.executionprojet.fr
  * Plugin URI:  http://premium.wpmudev.org/project/coursepress/
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: coursepress
  * Domain Path: /languages
- * Build Time:  2018-07-16
- * WDP ID:      913071
+ * Build Time:  2020-04-15
  *
  * @package CoursePress
  */

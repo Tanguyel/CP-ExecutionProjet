@@ -1,9 +1,12 @@
 Plugin Name: Execution Projet CoursePress
 Author:      Tanguy El Mouahidine
-Build Time:  16/07/18
+Build Time:  15/04/20
 
 CHANGELOG
 =================================================
+
+= 0.1.1 = 
+* Update : Modification du texte et de l'apparence du widget aide pour integrer un liens pour prendre un rdv en ligne.
 
 = 0.1.0 = 
 * Update : Reprise de la base de Coursepress 2.2.0 (voir ci dessous)
