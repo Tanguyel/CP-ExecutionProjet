@@ -1520,7 +1520,7 @@ var CoursePress = CoursePress || {};
 			this.module_collection.url = _coursepress._ajax_url + '?action=unit_builder&task=modules&course_id=' + _coursepress.course_id + '&unit_id=' + unit_id + '&page=' + page;
 			this.module_collection.fetch({
 				success: function() {
-					this.$('.unit-save-button').removeClass( 'disabled' );
+					this.jQuery('.unit-save-button').removeClass( 'disabled' );
 				}
 			});
 			// Get the number of pages
